@@ -8,6 +8,8 @@
 *   **Command Help**: Accessing documentation for commands (e.g., `man`, `--help`).
 *   **Redirects**: Directing input/output of commands (e.g., `>`, `>>`, `<`).
 *   **Super User**: Using elevated privileges with `sudo` or switching to the root user.
+*   **Text Processing**: Manipulating text data using tools like `grep` and `awk`.
+*   **File Searching**: Locating files and directories using commands like `find`.
 
 These skills enable you to customize your shell environment, manage commands, and perform advanced tasks, forming a bridge to text processing and file management.
 
@@ -30,6 +32,16 @@ These skills enable you to customize your shell environment, manage commands, an
 
 *   **Super User**:
     Use `sudo` to run commands as an administrator or `su` to switch to the root user.
+
+*   **Text Processing (grep, awk)**:
+    `grep`: Searches for patterns in files.
+    *Example*: `grep "error" /var/log/syslog` finds lines containing "error" in the syslog.
+    `awk`: A powerful text processing tool for pattern scanning and processing.
+    *Example*: `awk '{print $1}' file.txt` prints the first column of `file.txt`.
+
+*   **File Searching (find)**:
+    `find`: Searches for files and directories in a directory hierarchy.
+    *Example*: `find . -name "*.log"` finds all files ending with `.log` in the current directory and its subdirectories.
 
 ## Connection to the Roadmap
 "Shell and Other Basics" supports "Text Processing" (e.g., manipulating text with `grep` or `awk`) and "Working with Files" (e.g., managing permissions or links) by providing the foundational shell skills needed to execute and manage these tasks effectively.
@@ -102,23 +114,92 @@ Let’s create a scenario where you use these basics to perform a task in the Li
     Enter your password when prompted by `sudo`.
     This shows how "Super User" privileges are used for system-level changes.
 
+6.  **Search for Text within Files (grep)**:
+    Create a sample file and search for a specific word.
+    Create a file (`sample.txt`):
+    ```bash
+    echo "This is a sample file." > sample.txt
+    echo "It contains sample text." >> sample.txt
+    ```
+    Search for "sample":
+    ```bash
+    grep "sample" sample.txt
+    ```
+    Output:
+    `This is a sample file.`
+    `It contains sample text.`
+    This demonstrates using `grep` for text processing.
+
+7.  **Process Text with awk**:
+    Use `awk` to extract specific information from a file.
+    Create a file (`data.txt`):
+    ```bash
+    echo "Name,Age,City" > data.txt
+    echo "Alice,30,New York" >> data.txt
+    echo "Bob,24,London" >> data.txt
+    ```
+    Extract the names (first column):
+    ```bash
+    awk -F',' '{print $1}' data.txt
+    ```
+    Output:
+    `Name`
+    `Alice`
+    `Bob`
+    This demonstrates using `awk` for structured text processing.
+
+8.  **Find Files (find)**:
+    Locate files based on their name or type.
+    Create a dummy file:
+    ```bash
+    touch testfile.log
+    ```
+    Find all `.log` files in the current directory:
+    ```bash
+    find . -name "*.log"
+    ```
+    Output:
+    `./testfile.log`
+    This demonstrates using `find` to locate files.
+
 ### Full Script for Reference
 To automate this, you could save the following as a Bash script (`setup.sh`):
 
 ```bash
 #!/bin/bash
 
+# Basic commands
 echo "Current directory: $(pwd)" > file_list.txt
 ls >> file_list.txt
 echo "PATH updated to: $PATH" >> file_list.txt
 
+# Environment variable and custom script
 export PATH=$PATH:.
 echo "Hello from my script!" > hello.sh
 chmod +x hello.sh
 ./hello.sh >> file_list.txt
 
+# Super user privileges
 sudo mv hello.sh /usr/local/bin/
 hello.sh >> file_list.txt
+
+# Grep example
+echo "This is a sample file." > sample.txt
+echo "It contains sample text." >> sample.txt
+grep "sample" sample.txt >> file_list.txt
+
+# Awk example
+echo "Name,Age,City" > data.txt
+echo "Alice,30,New York" >> data.txt
+echo "Bob,24,London" >> data.txt
+awk -F',' '{print $1}' data.txt >> file_list.txt
+
+# Find example
+touch testfile.log
+find . -name "*.log" >> file_list.txt
+
+# Clean up created files
+rm sample.txt data.txt testfile.log
 ```
 Make it executable: `chmod +x setup.sh`.
 Run it: `./setup.sh`.
@@ -131,5 +212,7 @@ Check the result: `cat file_list.txt`.
 *   **Command Help**: Using `man ls` helps you learn additional options (e.g., `ls -l`).
 *   **Redirects**: `>` and `>>` save and append output to `file_list.txt`.
 *   **Super User**: `sudo mv` moves the script to a system directory.
+*   **Text Processing**: `grep` and `awk` are used to manipulate and extract information from text files.
+*   **File Searching**: `find` is used to locate specific files within the file system.
 
 These skills enable you to perform tasks under "Text Processing" (e.g., filtering `file_list.txt` with `grep`) or "Working with Files" (e.g., setting permissions on `hello.sh`).
