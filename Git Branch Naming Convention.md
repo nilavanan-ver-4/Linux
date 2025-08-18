@@ -129,10 +129,3 @@ experiment/new-search-algorithm
 | Experiment| `experiment/`| `experiment/new-search-algorithm` |
 
 ---
-
-📖 Add this convention to your team's workflow to ensure all branches are easy to understand and manage.
-```
-
----
-
-Would you like me to also include a **Git Flow diagram** (as an image inside the README) so it’s even more visual and professional?
