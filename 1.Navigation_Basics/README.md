@@ -63,6 +63,8 @@ At the beginner level, you’ll learn how to move around the file system using t
 1.  Create a folder:
     ```bash
     $ mkdir myfolder
+    # or
+    $mkdir -p mkdrie/{data_lake,etl,analytics,dashboard,config}
     ```
 2.  Navigate into it:
     ```bash
